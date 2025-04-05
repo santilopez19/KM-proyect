@@ -1,0 +1,15 @@
+/* App.css */
+
+/* You can add global styles here if needed */
+body {
+  font-family: "Geist Sans", sans-serif; /* Use the Geist Sans font */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Example of a more specific style */
+.App {
+  text-align: center;
+}
+

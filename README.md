@@ -24,3 +24,20 @@ Variante: JavaScript o TypeScript (según prefieras)
 Instalá las dependencias:
 
 npm install
+
+
+
+Para desarrollar esto en React, podemos usar:
+
+📌 Fabric.js → Manejo de gráficos en lienzo (canvas).
+
+📌 html2canvas → Para exportar el diseño.
+
+📌 TailwindCSS → Para la UI.
+
+Instalamos las librerías necesarias:
+
+sh
+Copy
+npm install fabric
+npm install html2canvas

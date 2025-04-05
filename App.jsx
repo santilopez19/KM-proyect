@@ -1,13 +1,39 @@
 "use client"
 
 import { useState } from "react"
+import DesignCanvas from "./components/DesignCanvas"
 import { Shirt, BadgeIcon as Hoodie, PocketIcon as PantaloneSimple, HardHatIcon as Hat } from "lucide-react"
-import ClothingDesigner from "./components/ClothingDesigner"
-import "./App.css"
+import "./App.css" // Import the CSS but we'll override some styles
 
 export default function App() {
   const [selectedGarment, setSelectedGarment] = useState(null)
   const [activeTab, setActiveTab] = useState("home")
+
+  // Create placeholder images for garments
+  const createPlaceholderImage = (text) => {
+    const canvas = document.createElement("canvas")
+    canvas.width = 400
+    canvas.height = 500
+    const ctx = canvas.getContext("2d")
+
+    // Fill background
+    ctx.fillStyle = "#f0f0f0"
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    // Draw outline
+    ctx.strokeStyle = "#cccccc"
+    ctx.lineWidth = 2
+    ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20)
+
+    // Add text
+    ctx.fillStyle = "#666666"
+    ctx.font = "bold 24px Arial"
+    ctx.textAlign = "center"
+    ctx.textBaseline = "middle"
+    ctx.fillText(text, canvas.width / 2, canvas.height / 2)
+
+    return canvas.toDataURL()
+  }
 
   const renderHome = () => (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -67,8 +93,8 @@ export default function App() {
             <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl font-bold text-blue-500">3</span>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Visualizá en 3D</h3>
-            <p className="text-gray-600">Mirá tu diseño en un maniquí 3D y descargá la imagen final.</p>
+            <h3 className="text-xl font-semibold mb-2">Descargá o Compartí</h3>
+            <p className="text-gray-600">Guardá tu diseño como imagen o envialo directamente para producción.</p>
           </div>
         </div>
       </section>
@@ -161,12 +187,13 @@ export default function App() {
   )
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    // Override the default App.css styles with a full-width container
+    <div className="min-h-screen flex flex-col bg-gray-50" style={{ maxWidth: "100%", padding: 0, margin: 0 }}>
       {renderHeader()}
 
       <main className="flex-grow">
         {selectedGarment ? (
-          <ClothingDesigner garment={selectedGarment} onBack={() => setSelectedGarment(null)} />
+          <DesignCanvas garment={selectedGarment} onBack={() => setSelectedGarment(null)} />
         ) : (
           renderHome()
         )}
